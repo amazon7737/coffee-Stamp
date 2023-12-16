@@ -65,15 +65,11 @@ router.get("/mypage/4", async (req, res) => {
     [Number(owner[0][0].cafe_id)]
   );
 
-  //   console.log("propen:", propen[0]);
-  //   console.log("owner::", owner[0][0].cafe_id);
-
   // 매출
   const sales = await pool.query(
     "select * from dbseven.monthly_record where cafe_id = ?;",
     [Number(owner[0][0].cafe_id)]
   );
-  //   console.log(sales[0]);
 
   //성향 가입 날짜
   const register_time = Date.parse(propen[0][0].create_time);
@@ -84,27 +80,15 @@ router.get("/mypage/4", async (req, res) => {
   const after_register = [];
 
   for (var i = 0; i < sales[0].length; i++) {
-    // console.log(Date.parse(register_time));
-    // console.log(
-    //   "sales:",
-    //   i,
-    //   sales[0][i].create_time,
-    //   Date.parse(sales[0][i].create_time)
-    // );
     const sales_register_time = Date.parse(sales[0][i].create_time);
-    // console.log("sales_register_time", sales_register_time);
 
     // 성향 가입 전후 날짜별 데이터 정리
     if (register_time < sales_register_time) {
       after_register.push(sales[0][i]);
-      //   console.log(after_register);
     } else {
       no_register.push(sales[0][i]);
     }
   }
-
-  //   console.log("after_register:", after_register);
-  //   console.log("no register:", no_register);
 
   // 성향 가입 후 매출 연산
 
@@ -113,7 +97,6 @@ router.get("/mypage/4", async (req, res) => {
 
   // 성향 가입 전 매출 총합
   for (var i = 0; i < no_register.length; i++) {
-    // console.log(no_register[i].amount);
     no_register_result += Number(no_register[i].amount);
   }
   for (var i = 0; i < after_register.length; i++) {
@@ -125,12 +108,7 @@ router.get("/mypage/4", async (req, res) => {
   let result_money =
     ((after_register_result - no_register_result) / no_register_result) * 100;
 
-  //   console.log("no:", no_register_result);
-  //   console.log("after:", after_register_result);
-
   // 성향 가입 후 매출 총합
-
-  //   console.log("sales:", sales[0]);
 
   // 성향 json
   // 인테리어
@@ -178,6 +156,8 @@ router.get("/mypage/4", async (req, res) => {
     // 성향 가입을 했다면
 
     // 날짜가 가입일 보내주고 / 성향 서비스 만료일
+    console.log("after_register:", after_register);
+    console.log("no_register:", no_register);
 
     // 결과 json
     const result = [
@@ -191,15 +171,7 @@ router.get("/mypage/4", async (req, res) => {
     ];
 
     return res.render("cafe_mypage_attract", { sales: "", result: result[0] });
-
-    // res.render("cafe_mypage_atrract", {});
   }
-
-  // 성향 내역 조회
-  // 성향 내역이 null 이면 가입페이지 로드 시키고 -> 성향 결제 주문
-  // null 아니면 연산 시키기
-
-  //   res.render("cafe_mypage_attract", {});
 });
 
 module.exports = router;
