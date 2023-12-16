@@ -1,10 +1,10 @@
 const mysql = require("mysql2/promise");
 
 const pool = mysql.createPool({
-  host: "localhost",
+  host: "svc.sel5.cloudtype.app",
   user: "root",
-  password: "",
-  port: 3306,
+  password: "0000",
+  port: 31513,
   database: "dbseven",
 });
 

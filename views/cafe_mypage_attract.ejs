@@ -25,10 +25,56 @@
 
 <div class="wrap">
 
+<div class="shop-manage-wrap-3">
+    <div class="shop-manage-tab-1">
+        <button class="shop-sell" onclick="location.href = `/owner/mypage/1`">
+            매출 관리
+        </button>
+        <button class="shop-menu">
+            메뉴 관리
+        </button>
+        <button class="shop-stamp">스탬프 관리</button>
+        <button class="shop-marry" onclick="location.href = `/owner/mypage/4`" >성향 서비스</button>
+        </div>
+
+        <!-- 당신의 가입일 은 언제고 , 몇일 남았습니다. -->
+        <!-- 성향 가입 전 매출 총액 이랑 성향 가입 후 매출 총액이 얼만데 몇% 상승했다. -->
+
+
+
+    <div class="marry-manage-container">
+        <h1 class="propen-guide-title">당신의 카페 성향 가입일은 ~~~ 입니다.</h1>
+        <h1 class="propen-guide-title">성향 서비스 만료일이 ~~ 남았습니다.</h1>
+        <h1>매번 이용해주셔서 감사합니다.</h1>
+
+        <table class="shop-manage">
+            <thead>
+                <tr class="shop-manage-thead">
+                    <th class="thead-title">년월</th>
+                    <th class="thead-title">매출액</th>
+                    <th class="thead-title">스탬프 사용액</th>
+                    <th class="thead-title">포인트 사용액</th>
+                    <th class="thead-title">총액</th>
+                </tr>
+            </thead>
+            <tbody>
+            <% for(var i =0; i< sales.length; i++) { %>
+
+                <tr>
+                    <th class="thead-content" id= "shop-manage-content"><%= sales[i].create_time %></th>
+                    <th class="thead-contnet"id= "shop-manage-content"><%= sales[i].amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].stamp_amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].point_amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].total_amount %></th>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    </div>
 
 </div>
-
+ 
 </div>
-</body>
+
 
 </html>
