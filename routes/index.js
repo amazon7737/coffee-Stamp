@@ -1,7 +1,9 @@
 var express = require("express");
 var router = express.Router();
 const pool = require("../db/db");
+
 /* GET home page. */
+
 router.get("/", async (req, res, next) => {
   const cafe = await pool.query("select * from cafe;");
   const sess = req.session.user_id;

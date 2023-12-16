@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .order-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .order-container {
+        width: 540px;
+        height: 430px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="order-wrap">
+      <div class="order-container">
+        <form action="/order/cafe_ordering" method="post">
+          <h1>구매자 정보</h1>
+          <table class="shop-manage">
+            <thead>
+              <tr class="shop-manage-thead">
+                <th class="thead-title">이름</th>
+                <th class="thead-title">이메일</th>
+                <th class="thead-title">휴대폰 번호</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="thead-content" id="shop-manage-content">
+                  <%= user.name %>
+                </th>
+                <th class="thead-contnet" id="shop-manage-content">
+                  <%= user.email %>
+                </th>
+                <th class="thead-content" id="shop-manage-content">
+                  <%= user.phone %>
+                </th>
+                <input type="hidden" name="user" value="<%= user %>" />
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="shop-manage">
+            <thead>
+              <tr class="shop-manage-thead">
+                <th
+                  class="thead-title"
+                  name="item"
+                  value="성향 매칭 서비스 상품"
+                >
+                  성향 매칭 서비스 상품
+                </th>
+                <input type="number" min="1" name="item_month" value="1" />
+                <input type="hidden" name="count" value="1" />
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th class="thead-content" id="shop-manage-content">수량 1개</th>
+              </tr>
+            </tbody>
+          </table>
+
+          <button type="submit">주문하기</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
