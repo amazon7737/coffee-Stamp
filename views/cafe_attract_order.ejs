@@ -41,7 +41,6 @@
                 <th class="thead-content" id="shop-manage-content">
                   <%= user.phone %>
                 </th>
-                <input type="hidden" name="user" value="<%= user %>" />
               </tr>
             </tbody>
           </table>
@@ -49,6 +48,7 @@
           <table class="shop-manage">
             <thead>
               <tr class="shop-manage-thead">
+                <!-- 상품 이름 -->
                 <th
                   class="thead-title"
                   name="item"
@@ -56,7 +56,12 @@
                 >
                   성향 매칭 서비스 상품
                 </th>
-                <input type="number" min="1" name="item_month" value="1" />
+
+                <!-- 월별  -->
+                <input type="number" min="6" name="item_month" value="6" />
+
+                <!-- 수량 -->
+
                 <input type="hidden" name="count" value="1" />
               </tr>
             </thead>
