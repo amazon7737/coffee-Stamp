@@ -47,6 +47,7 @@
         <h1 class="propen-guide-title">성향 서비스 만료일이 <%= result.result_time %>개월 남았습니다.</h1>
         <h1>매번 이용해주셔서 감사합니다.</h1>
 
+
         <h1>성향 서비스 가입 전 매출액 </h1>
         <table class="shop-manage">
             <thead>
@@ -59,14 +60,14 @@
                 </tr>
             </thead>
             <tbody>
-            <% for(var i =0; i< sales.length; i++) { %>
+            <% for(var i =0; i < result.no_register.length; i++) { %>
 
                 <tr>
-                    <th class="thead-content" id= "shop-manage-content"><%= sales[i].create_time %></th>
-                    <th class="thead-contnet"id= "shop-manage-content"><%= sales[i].amount %></th>
-                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].stamp_amount %></th>
-                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].point_amount %></th>
-                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].total_amount %></th>
+                    <th class="thead-content" id= "shop-manage-content"><%= result.no_register[i].create_time %></th>
+                    <th class="thead-contnet"id= "shop-manage-content"><%= result.no_register[i].amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= result.no_register[i].stamp_amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= result.no_register[i].point_amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= result.no_register[i].total_amount %></th>
                 </tr>
                 <% } %>
             </tbody>
@@ -85,20 +86,20 @@
                 </tr>
             </thead>
             <tbody>
-            <% for(var i =0; i< sales.length; i++) { %>
+            <% for(var i =0; i< result.no_register.length; i++) { %>
 
                 <tr>
-                    <th class="thead-content" id= "shop-manage-content"><%= sales[i].create_time %></th>
-                    <th class="thead-contnet"id= "shop-manage-content"><%= sales[i].amount %></th>
-                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].stamp_amount %></th>
-                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].point_amount %></th>
-                    <th class="thead-content"id= "shop-manage-content"><%= sales[i].total_amount %></th>
+                    <th class="thead-content" id= "shop-manage-content"><%= result.no_register[i].create_time %></th>
+                    <th class="thead-contnet"id= "shop-manage-content"><%= result.no_register[i].amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= result.no_register[i].stamp_amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= result.no_register[i].point_amount %></th>
+                    <th class="thead-content"id= "shop-manage-content"><%= result.no_register[i].total_amount %></th>
                 </tr>
                 <% } %>
             </tbody>
         </table>
 
-        <h4>총 ~~ % 차이가 발생했습니다.</h4>
+        <h4>총 <%= parseInt(result.result_money) %> % 차이가 발생했습니다.</h4>
     </div>
 
 </div>

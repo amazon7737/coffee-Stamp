@@ -65,7 +65,7 @@ router.get("/mypage/4", async (req, res) => {
     [Number(owner[0][0].cafe_id)]
   );
 
-  console.log("propen:", propen[0]);
+  //   console.log("propen:", propen[0]);
   //   console.log("owner::", owner[0][0].cafe_id);
 
   // 매출
@@ -76,18 +76,59 @@ router.get("/mypage/4", async (req, res) => {
   //   console.log(sales[0]);
 
   //성향 가입 날짜
-  const register_time = propen[0][0].create_time;
+  const register_time = Date.parse(propen[0][0].create_time);
+
+  console.log("register_time", register_time);
   // 성향 가입 전 매출
   const no_register = [];
   const after_register = [];
 
   for (var i = 0; i < sales[0].length; i++) {
-    console.log(Date.parse(register_time));
-    console.log("sales:", i, sales[0][i].create_time);
-    // if()
+    // console.log(Date.parse(register_time));
+    // console.log(
+    //   "sales:",
+    //   i,
+    //   sales[0][i].create_time,
+    //   Date.parse(sales[0][i].create_time)
+    // );
+    const sales_register_time = Date.parse(sales[0][i].create_time);
+    // console.log("sales_register_time", sales_register_time);
+
+    // 성향 가입 전후 날짜별 데이터 정리
+    if (register_time < sales_register_time) {
+      after_register.push(sales[0][i]);
+      //   console.log(after_register);
+    } else {
+      no_register.push(sales[0][i]);
+    }
   }
 
-  // 성향 가입 후 매출
+  //   console.log("after_register:", after_register);
+  //   console.log("no register:", no_register);
+
+  // 성향 가입 후 매출 연산
+
+  let no_register_result = 0;
+  let after_register_result = 0;
+
+  // 성향 가입 전 매출 총합
+  for (var i = 0; i < no_register.length; i++) {
+    // console.log(no_register[i].amount);
+    no_register_result += Number(no_register[i].amount);
+  }
+  for (var i = 0; i < after_register.length; i++) {
+    after_register_result += Number(after_register[i].amount);
+  }
+
+  // 총 % 차이 금액이 발생함
+  // 차를 구하고 전년도 분의 차
+  let result_money =
+    ((after_register_result - no_register_result) / no_register_result) * 100;
+
+  //   console.log("no:", no_register_result);
+  //   console.log("after:", after_register_result);
+
+  // 성향 가입 후 매출 총합
 
   //   console.log("sales:", sales[0]);
 
@@ -143,6 +184,9 @@ router.get("/mypage/4", async (req, res) => {
       {
         create_time: propen[0][0].create_time,
         result_time: result_time,
+        after_register: after_register,
+        no_register: no_register,
+        result_money: result_money,
       },
     ];
 
