@@ -2,6 +2,13 @@ var express = require("express");
 var router = express.Router();
 const pool = require("../db/db");
 
+// 오늘날짜
+let today = new Date();
+let year = today.getFullYear();
+let month = today.getMonth() + 1;
+let date = today.getDate();
+const wdate = year + "-" + month + "-" + date;
+
 /**
  * owner
  */
@@ -82,12 +89,22 @@ router.get("/mypage/4", async (req, res) => {
     [propen[0][0].cafe_id, owner_id[0][0].user_id]
   );
 
-  // 만료일
+  // 만료 월
+  const expire_month = propen[0][0].create_time.split("-")[1];
 
+  // 오늘 날짜 - 만료 월
+  const expire = Number(month) - Number(expire_month);
+  //패키지 사이즈
+  const package_time = Number(propen[0][0].package_size);
+
+  // 만료일 연산
+  const result_time = package_time - expire;
+
+  console.log("result_time:", result_time);
   const result = [
     {
       create_time: propen[0][0].create_time,
-      exit_time: "",
+      result_time: result_time,
     },
   ];
 
