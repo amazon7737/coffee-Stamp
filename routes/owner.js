@@ -8,7 +8,7 @@ const pool = require("../db/db");
 /* GET home page. */
 router.get("/mypage/1", async (req, res) => {
   const cafe = await pool.query(
-    "SELECT a.*, b.* FROM dbseven.cafe a inner join dbseven.user b on a.owner_id = b.login_id;"
+    "SELECT a.*, b.*, c.* FROM dbseven.owner a inner join dbseven.user b on a.user_id = b.id inner join dbseven.cafe c on a.cafe_id = c.id;"
   );
 
   const sales = await pool.query("select * from dbseven.monthly_record;");
