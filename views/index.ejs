@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        width: 540px;
+        height: 430px;
+        display: flex;
+        align-items: center;
+        justify-content: baseline;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <% if(sess == 1230 | sess == 1231) { %> <% include ./navbar.ejs %> <% } else
+    { %> <% include ./navbar2.ejs %> <% } %>
+
+    <div class="wrap">
+      <div class="container">
+        <% for(var i =0; i< cafe.length; i++) { %>
+
+        <input type="hidden" name="cafe_id" value="<%=cafe[i].id %>" />
+
+        <a href="user/cafedetail/<%= cafe[i].id%>">
+          <% include ./card.ejs %>
+        </a>
+
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
