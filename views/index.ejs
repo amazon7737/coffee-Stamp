@@ -19,7 +19,8 @@
     </style>
   </head>
   <body>
-    <% include ./navbar.ejs %>
+    <% if(sess == 1230 | sess == 1231) { %> <% include ./navbar.ejs %> <% } else
+    { %> <% include ./navbar2.ejs %> <% } %>
 
     <div class="wrap">
       <div class="container">

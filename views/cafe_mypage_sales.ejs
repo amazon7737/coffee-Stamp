@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+
+    <style>
+
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.wrap{
+    width: 100vw;
+    height: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+    </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+
+<div class="shop-manage-wrap-1">
+
+    <div class="shop-manage-tab-1">
+        <button class="shop-sell">
+            매출 관리
+        </button>
+        <button class="shop-menu">
+            메뉴 관리
+        </button>
+        <button class="shop-stamp">스탬프 관리</button>
+        <button class="shop-marry">성향 서비스</button>
+        </div>
+
+
+        <div class="shop-title-1">
+            카페제목
+        </div>
+        <div class="shop-manage-container">
+            <table class="shop-manage">
+                <thead>
+                    <tr class="shop-manage-thead">
+                        <th class="thead-title">년월</th>
+                        <th class="thead-title">매출액</th>
+                        <th class="thead-title">스탬프 사용액</th>
+                        <th class="thead-title">포인트 사용액</th>
+                        <th class="thead-title">총액</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <% for(var i =0; i< sales.length; i++) { %>
+
+                    <tr>
+                        <th class="thead-content" id= "shop-manage-content"><%= sales[i].create_time %></th>
+                        <th class="thead-contnet"id= "shop-manage-content"><%= sales[i].amount %></th>
+                        <th class="thead-content"id= "shop-manage-content"><%= sales[i].stamp_amount %></th>
+                        <th class="thead-content"id= "shop-manage-content"><%= sales[i].point_amount %></th>
+                        <th class="thead-content"id= "shop-manage-content"><%= sales[i].total_amount %></th>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+        
+</div>
+
+
+</div>
+
+</div>
+</body>
+
+</html>

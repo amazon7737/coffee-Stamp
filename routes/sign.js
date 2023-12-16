@@ -1,6 +1,17 @@
 var express = require("express");
 var router = express.Router();
 const pool = require("../db/db");
+/**
+ *
+ * user1 = 고객1
+ * user2 = 고객2
+ *
+ * owner1 = 점주1 (새롭게가입)
+ * owner2 = 점주2 (만료직전)
+ *
+ *
+ */
+
 /* GET home page. */
 router.get("/", async (req, res, next) => {
   res.render("sign", { sess: null });

@@ -10,6 +10,8 @@ var usersRouter = require("./routes/users");
 var orderRouter = require("./routes/order");
 var signRouter = require("./routes/sign");
 
+var ownerRouter = require("./routes/owner");
+
 var app = express();
 
 /**
@@ -44,6 +46,8 @@ app.use("/", indexRouter);
 app.use("/user", usersRouter);
 app.use("/order", orderRouter);
 app.use("/sign", signRouter);
+
+app.use("/owner", ownerRouter);
 
 // catch 404 and forward to error handler
 app.use(async (req, res, next) => {
