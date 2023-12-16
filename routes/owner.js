@@ -7,11 +7,28 @@ const pool = require("../db/db");
  */
 /* GET home page. */
 router.get("/mypage/1", async (req, res) => {
-  const cafe = await pool.query(
-    "SELECT a.*, b.*, c.* FROM dbseven.owner a inner join dbseven.user b on a.user_id = b.id inner join dbseven.cafe c on a.cafe_id = c.id;"
+  const user_id = req.session.user_id;
+  const owner_id = await pool.query(
+    "select id user_id from user where login_id = ?",
+    [user_id]
   );
 
-  const sales = await pool.query("select * from dbseven.monthly_record;");
+  const cafeCheck = await pool.query(
+    "select * from dbseven.cafe where owner_id =?",
+    [owner_id[0][0].user_id]
+  );
+
+  const cafe = await pool.query(
+    "SELECT a.*, b.*, c.* FROM dbseven.owner a inner join dbseven.user b on a.user_id = b.id inner join dbseven.cafe c on a.cafe_id = c.id where user_id = ?;",
+    [owner_id[0][0].user_id]
+  );
+
+  console.log(cafe[0]);
+
+  const sales = await pool.query(
+    "select * from dbseven.monthly_record where cafe_id = ?;",
+    [Number(cafe[0][0].cafe_id)]
+  );
   console.log(sales[0]);
 
   res.render("cafe_mypage_sales", { sales: sales[0] });
