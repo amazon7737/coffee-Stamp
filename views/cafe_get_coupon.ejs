@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .container {
+        width: 540px;
+        height: 430px;
+        display: flex;
+        align-items: center;
+        justify-content: baseline;
+        flex-direction: row;
+        flex-wrap: wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <form action="/user/get/5" method="post">
+      <!-- 5개로 변환 -->
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" class="thead">첫번째 보상</th>
+            <th scope="col" class="thead">필요 스탬프 개수</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <input type="hidden" name="stamp_use" value="5" />
+          <input type="hidden" name="name" value="<%= gift[0].name %>" />
+          <tr>
+            <th scope="col" name="name" class="thead"><%= gift[0].name %></th>
+            <th scope="col" class="thead">5개</th>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit">쿠폰받기</button>
+    </form>
+
+    <!-- 10개로 변환 -->
+    <form action="/user/get/10" method="post">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col" class="thead">두번째 보상</th>
+            <th scope="col" class="thead">필요 스탬프 개수</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <input type="hidden" name="stamp_use" value="5" />
+          <input type="hidden" name="name" value="<%= gift[1].name %>" />
+          <tr>
+            <th scope="col" name="name" class="thead"><%= gift[1].name %></th>
+            <th scope="col" class="thead">10개</th>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit">쿠폰받기</button>
+    </form>
+  </body>
+</html>

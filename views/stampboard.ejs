@@ -15,11 +15,19 @@
 <div class="">
   스탬프 발행일 : <%= stamp_setting[i].create_time %>
   스탬프판 크기 : <%= stamp_setting[i].total_stamp %>
+  <% if (stamp_setting[i].total_stamp == "10") { %>
+  <a href = "/user/get/10/<%= cafe_member[i].cafe_id %>">쿠폰 받기</a>
+
+  <% } else {%>
+    <a href = "/user/get/20/<%= cafe_member[i].cafe_id %>">쿠폰 받기</a>
+
+    <% } %>
+
 </div>
 <div class="stamp-frame">
   <div class="cafe-stamp">
       <% for(let j =0; j< Number(stamp_setting[i].stamp_count);j++ ) { %>
-         <%include ./stamp.ejs %> 
+         <% include ./stamp.ejs %> 
          <% } %>
     </div>
   

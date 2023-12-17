@@ -9,6 +9,11 @@ let month = today.getMonth() + 1;
 let date = today.getDate();
 const wdate = year + "-" + month + "-" + date;
 
+// 스탬프 설정 목록
+let stamp_setting = [];
+
+// 카페 멤버들 재정리 목록
+let cafe_member_result = [];
 /* GET users listing. */
 router.get("/mypage", async (req, res, next) => {
   const sess = req.session.user_id;
@@ -38,13 +43,10 @@ router.get("/mypage/3", async (req, res) => {
 
   // console.log("cafe_member:", cafe_member[0]);
 
-  // 스탬프 설정 목록
-  let stamp_setting = [];
-
   // 각 카페별 스탬프 설정과 해당되는 카페 아이디 매치 후 검색
   for (let i = 0; i < cafe_member[0].length; i++) {
     const stamp_setting_search = await pool.query(
-      "select * from dbseven.stamp_setting where cafe_id =? and create_time = ?;",
+      "select * from dbseven.stamp_setting where cafe_id =? and create_time = ? ;",
       [Number(cafe_member[0][i].cafe_id), "2023-12-01"]
     );
 
@@ -54,7 +56,7 @@ router.get("/mypage/3", async (req, res) => {
       [Number(cafe_member[0][i].cafe_id)]
     );
     const stamp_count = await pool.query(
-      "select accrued_stamp stamp_count from dbseven.stamp_board where cafe_member_id =?",
+      "select accrued_stamp stamp_count from dbseven.stamp_board where cafe_member_id =? ",
       [cafe_member_id[0][0].id]
     );
 
@@ -80,9 +82,6 @@ router.get("/mypage/3", async (req, res) => {
 
   // console.log("stamp_setting:", stamp_setting);
 
-  // 카페 멤버들 재정리 목록
-  let cafe_member_result = [];
-
   // 카페들 cafe_member 데이터 재정리
   for (let i = 0; i < cafe_member[0].length; i++) {
     for (let j = 0; j < stamp_setting.length; j++) {
@@ -94,6 +93,7 @@ router.get("/mypage/3", async (req, res) => {
         // console.log("cafe_member_id:", cafe_member_id[0]);
 
         cafe_member_result.push({
+          cafe_id: cafe_member[0][i].cafe_id,
           cafe_name: cafe_member[0][i].cafe_name,
           stamp_setting: stamp_setting[j].total_stamp,
           stamp_image: cafe_member[0][i].stamp_image,
@@ -112,8 +112,77 @@ router.get("/mypage/3", async (req, res) => {
 });
 
 // 스탬프 쿠폰으로 바꾸기
-router.post("/get/stamp", async (req, res) => {
-  res.send("스탬프 변환");
+router.get("/get/10/:cafe_id", async (req, res) => {
+  const cafe_id = req.params.cafe_id;
+
+  console.log(cafe_id);
+
+  console.log("stamp_setting:", stamp_setting);
+  // console.log("cafe_member_result", cafe_member_result);
+
+  // 카페 메뉴 검색 , 카페 메뉴당 스탬프 몇개 필요한지
+  const cafe_menu = await pool.query("select * from menu where cafe_id = ?", [
+    cafe_id,
+  ]);
+
+  const gift_menu = await pool.query(
+    "SELECT b.*, c.* FROM dbseven.stamp_setting a inner join dbseven.menu b on a.gift_first_id = b.id inner join dbseven.menu c on a.gift_second_id = c.id;"
+  );
+  console.log(gift_menu[0]);
+
+  // 가지겠다고 하면 바로 주문 기능 만들어서 스탬프 개수 줄어들게 할려고하는데
+  // 스탬프 개수 비교해보고 적으면 바로 알림띄우고 뒤로가기
+
+  res.render("cafe_get_coupon", { gift: gift_menu[0] });
+});
+
+router.get("/get/20/:cafe_id", async (req, res) => {
+  const user_id = req.session.user_id;
+
+  const owner_id = await pool.query(
+    "select id user_id from user where login_id = ?",
+    [user_id]
+  );
+
+  const cafe_id = req.params.cafe_id;
+
+  let my_stamp = [];
+  // 해당하는 카페에서 스탬프 몇개 가지고 있는지 체크
+  // for(let i =0; i<stamp_setting.length; i++){
+
+  //   if(stamp_setting[i])
+
+  // }
+
+  console.log(cafe_id);
+
+  res.send("20개짜리 페이지");
+});
+
+router.post("/get/5", async (req, res) => {
+  const { name, stamp_use } = req.body;
+  console.log(name, stamp_use);
+
+  // 스탬프 개수 충분한지 체크
+
+  // 스탬프 에서 쿠폰을 변환 과정
+
+  // 스팸프 감소 갱신
+
+  res.send("변환");
+});
+
+router.post("/get/10", async (req, res) => {
+  const { name, stamp_use } = req.body;
+  console.log(name, stamp_use);
+
+  // 스탬프 개수 충분한지 체크
+
+  // 스탬프 에서 쿠폰을 변환 과정
+
+  // 스팸프 감소 갱신
+
+  res.send("변환");
 });
 
 module.exports = router;
