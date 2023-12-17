@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+  <head>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .user-info-container {
+        width: 540px;
+        height: 430px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .stamp-frame {
+        width: 720px;
+        height: 320px;
+        border-radius: 4px;
+        border: 1px solid #838383;
+        top: 140px;
+        left: 300px;
+      }
+      .cafe-stamp {
+        /* display: flex; */
+        /* flex-wrap: wrap; */
+        display: grid;
+        grid-template-areas:
+          "circle-1 circle-2 circle-3 circle-4 circle-5"
+          "circle-6 circle-7 circle-8 circle-9 circle-10";
+        gap: 5%;
+      }
+           #stamp-dot {
+        width: 90px;
+        height: 90px;
+        border: 1px dotted #838383;
+        border-radius: 100px;
+        margin-left: 10px;
+        margin-top: 40px;
+      }
+      .release-date{
+        padding-top: 140px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="user-info-wrap">
+        <div class="user-info-tab-1">
+          <button class="shop-stamp" onclick="location.href = `/user/mypage/3`">
+            스탬프
+          </button>
+          <button class="shop-marry" onclick="location.href = `/user/mypage/4`">
+            등록한카페조회
+          </button>
+          <button class="shop-point" onclick="location.href = `/user/mypage/5`">
+            나의 출석
+          </button>
+          <button
+            class="shop-follow"
+            onclick= "location.href = `/user/mypage/6`"
+          >
+            팔로잉 리뷰
+          </button>
+        </div>
+
+        <button class="next-level">></button>
+
+        <div class="customer-mypage-2">
+          <div class="reward-tap">
+            <img src="./point.png" class="point-image-reward" />
+            <p class="attend-point-title">출석 포인트></p>
+            <p class="attend-point-result">~개</p>
+
+            <img src="./stamp.png" class="stamp-image-reward" />
+            <p class="stamp-count-title">스탬프 개수></p>
+            <p class="stamp-count-result">10,000</p>
+          </div>
+
+          <div class="tab-2">
+            <button class="myinfo-2" id="tab-button">내정보</button>
+            <button class="order-info-2" id="tab-button">주문 내역 조회</button>
+            <button class="stamp-info-2" id="tab-button">스탬프</button>
+            <button class="cafe-info-2" id="tab-button">
+              등록한 카페 조회
+            </button>
+            <button class="my-attend-2" id="tab-button">나의 출석</button>
+            <button class="follwing-review-2" id="tab-button">
+              팔로잉 리뷰
+            </button>
+          </div>
+
+          <h2>이번달 <%= month %> 월의 스탬프 입니다</h2>
+
+ 
+          <% for(var i=0; i< cafe_member.length; i++) { %>
+
+          <% include ./stampboard.ejs %>
+
+          <% } %>
+         
+        </div>
+    </div>
+  </body>
+</html>

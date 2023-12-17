@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+  <head>
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+      .wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .user-info-container {
+        width: 540px;
+        height: 430px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+    </style>
+  </head>
+    <div class="wrap">
+      <div class="user-info-wrap">
+        <div class="user-info-tab-1">
+          <button class="shop-sell" onclick="location.href = `/user/mypage`">
+            내 정보
+          </button>
+          <button class="shop-menu" onclick="location.href = `/user/mypage/2`">
+            주문내역조회
+          </button>
+          <button class="shop-stamp" onclick="location.href = `/user/mypage/3`">
+            스탬프
+          </button>
+          <button class="shop-marry" onclick="location.href = `/user/mypage/4`">
+            등록한카페조회
+          </button>
+          <button class="shop-point" onclick="location.href = `/user/mypage/5`">
+            나의 출석
+          </button>
+          <button
+            class="shop-follow"
+            onclick="location.href = `/user/mypage/6`"
+          >
+            팔로잉 리뷰
+          </button>
+        </div>
+
+        <div class="user-info-container">
+          <h1 class="user-info-title">내 정보</h1>
+
+          <input type="text" name="name" value="<%= user.name %>" />
+          <input type="text" name="login_id" value="<%= user.login_id %>" />
+          <input type="text" name="password" value="<%= user.password %>" />
+          <input type="text" name="phone" value="<%= user.phone %>" />
+          <input type="text" name="gender" value="<%= user.gender %>" />
+          <input type="text" name="email" value="<%= user.email %>" />
+          <input type="text" name="birthdday" value="<%= user.birthday %>" />
+          <input type="text" name="point" value="<%= user.point %>" />
+          
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
