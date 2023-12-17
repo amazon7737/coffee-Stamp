@@ -118,7 +118,7 @@ router.get("/get/10/:cafe_id", async (req, res) => {
   console.log(cafe_id);
 
   console.log("stamp_setting:", stamp_setting);
-  // console.log("cafe_member_result", cafe_member_result);
+  console.log("cafe_member_result", cafe_member_result);
 
   // 카페 메뉴 검색 , 카페 메뉴당 스탬프 몇개 필요한지
   const cafe_menu = await pool.query("select * from menu where cafe_id = ?", [
